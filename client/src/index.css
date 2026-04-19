@@ -1,0 +1,205 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap');
+
+/* ── Base ───────────────────────────── */
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #030b14;
+  color: #c8d6e0;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Grid background ────────────────── */
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(26, 107, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(26, 107, 255, 0.025) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* ── Pulse/flutter animations ───────── */
+@keyframes pulseBlue {
+  0%, 100% { box-shadow: 0 0 8px rgba(26, 107, 255, 0.4); }
+  50% { box-shadow: 0 0 24px rgba(26, 107, 255, 0.7); }
+}
+
+@keyframes flutterBlue {
+  0%, 100% { opacity: 0.6; transform: translateY(0); }
+  50% { opacity: 1; transform: translateY(-3px); }
+}
+
+@keyframes grid-drift {
+  0% { background-position: 0 0; }
+  100% { background-position: 60px 60px; }
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes scanline {
+  0% { top: -5%; }
+  100% { top: 105%; }
+}
+
+.animate-scanline {
+  animation: scanline 8s linear infinite;
+}
+
+.animate-pulse-blue { animation: pulseBlue 2s ease-in-out infinite; }
+.animate-flutter-blue { animation: flutterBlue 3s ease-in-out infinite; }
+.animate-marquee { animation: marquee 30s linear infinite; }
+
+/* ── Glow effects ───────────────────── */
+.text-glow-blue {
+  text-shadow: 0 0 20px rgba(26, 107, 255, 0.5), 0 0 40px rgba(26, 107, 255, 0.2);
+}
+
+.text-glow-red {
+  text-shadow: 0 0 20px rgba(255, 59, 92, 0.4);
+}
+
+.box-glow-blue {
+  box-shadow: 0 0 30px rgba(26, 107, 255, 0.15), 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* ── Buttons ────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.875rem 2rem;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: none;
+  border-radius: 6px;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #1a6bff, #1050cc);
+  color: #ffffff;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #4a90ff, #1a6bff);
+  box-shadow: 0 0 30px rgba(26, 107, 255, 0.35);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: #c8d6e0;
+  border: 1px solid rgba(26, 107, 255, 0.3);
+  border-radius: 6px;
+}
+
+.btn-secondary:hover {
+  border-color: rgba(26, 107, 255, 0.6);
+  color: #4a90ff;
+  box-shadow: 0 0 20px rgba(26, 107, 255, 0.1);
+  transform: translateY(-1px);
+}
+
+.btn-danger {
+  background: linear-gradient(135deg, #ff3b5c, #e02050);
+  color: #fff;
+  border-radius: 6px;
+}
+
+.btn-danger:hover {
+  box-shadow: 0 0 20px rgba(255, 59, 92, 0.3);
+  transform: translateY(-1px);
+}
+
+/* ── Cards ──────────────────────────── */
+.cyber-card {
+  background: linear-gradient(145deg, rgba(8, 18, 30, 0.95), rgba(12, 25, 42, 0.7));
+  border: 1px solid rgba(26, 107, 255, 0.08);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  transition: all 0.4s ease;
+}
+
+.cyber-card:hover {
+  border-color: rgba(26, 107, 255, 0.22);
+  box-shadow: 0 8px 40px rgba(26, 107, 255, 0.06);
+  transform: translateY(-3px);
+}
+
+/* ── Form inputs ────────────────────── */
+.input-field {
+  width: 100%;
+  background: rgba(8, 18, 30, 0.8);
+  border: 1px solid rgba(26, 107, 255, 0.12);
+  border-radius: 8px;
+  padding: 0.875rem 1rem;
+  font-size: 0.875rem;
+  color: #c8d6e0;
+  font-family: 'Poppins', sans-serif;
+  transition: border-color 0.3s;
+  box-sizing: border-box;
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: rgba(26, 107, 255, 0.5);
+  box-shadow: 0 0 0 3px rgba(26, 107, 255, 0.08);
+}
+
+.input-field::placeholder {
+  color: rgba(200, 214, 224, 0.35);
+}
+
+/* ── Scrollbar ──────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #030b14; }
+::-webkit-scrollbar-thumb { background: rgba(26, 107, 255, 0.2); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(26, 107, 255, 0.35); }
+
+::selection {
+  background: rgba(26, 107, 255, 0.25);
+  color: #4a90ff;
+}
+
+/* ── Logo marquee ───────────────────── */
+.marquee-track {
+  display: flex;
+  width: max-content;
+}
+
+/* ── Health check progress ──────────── */
+.health-check-progress {
+  height: 4px;
+  background: rgba(26, 107, 255, 0.1);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.health-check-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #1a6bff, #4a90ff);
+  border-radius: 2px;
+  transition: width 0.5s ease;
+}
+
+/* ── Score ring ─────────────────────── */
+.score-ring {
+  transform: rotate(-90deg);
+}
+.score-ring-bg {
+  stroke: rgba(26, 107, 255, 0.1);
+}
+.score-ring-fill {
+  stroke: #1a6bff;
+  transition: stroke-dashoffset 1.5s ease;
+}
