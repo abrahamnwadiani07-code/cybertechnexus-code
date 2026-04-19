@@ -22,6 +22,8 @@ import ReportsPage from '@/portal/pages/ReportsPage';
 import TeamPage from '@/portal/pages/TeamPage';
 import AuditLogPage from '@/portal/pages/AuditLogPage';
 import SettingsPage from '@/portal/pages/SettingsPage';
+import VendorRiskPage from '@/portal/pages/VendorRiskPage';
+import EvidencePage from '@/portal/pages/EvidencePage';
 import './index.css';
 
 function App() {
@@ -38,6 +40,8 @@ function App() {
             <Route path="risks" element={<RisksPage />} />
             <Route path="incidents" element={<IncidentsPage />} />
             <Route path="assets" element={<AssetsPage />} />
+            <Route path="vendors" element={<VendorRiskPage />} />
+            <Route path="evidence" element={<EvidencePage />} />
             <Route path="reports" element={<ReportsPage />} />
             <Route path="team" element={<TeamPage />} />
             <Route path="audit-log" element={<AuditLogPage />} />

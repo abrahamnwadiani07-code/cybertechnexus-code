@@ -8,7 +8,7 @@ import {
 
 const frameworks = [
   { id: 'iso27001', name: 'ISO 27001', progress: 94, controls: 107, total: 114, status: 'on-track' },
-  { id: 'iso27001', name: 'ISO 27001', progress: 88, controls: 102, total: 116, status: 'on-track' },
+  { id: 'dora', name: 'DORA', progress: 88, controls: 82, total: 93, status: 'on-track' },
   { id: 'gdpr', name: 'GDPR', progress: 91, controls: 64, total: 70, status: 'on-track' },
   { id: 'hipaa', name: 'HIPAA', progress: 76, controls: 41, total: 54, status: 'attention' },
   { id: 'pci', name: 'PCI DSS', progress: 82, controls: 198, total: 242, status: 'on-track' },

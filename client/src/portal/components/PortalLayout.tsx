@@ -3,7 +3,7 @@ import { useAuth } from '../context/AuthContext';
 import {
   LayoutDashboard, Shield, AlertTriangle, FileText, Server,
   Users, Settings, LogOut, Bell, Search, ChevronDown,
-  Activity, BookOpen
+  Activity, BookOpen, Globe, FolderOpen
 } from 'lucide-react';
 import { useState } from 'react';
 
@@ -13,6 +13,8 @@ const navItems = [
   { to: '/portal/risks', icon: AlertTriangle, label: 'Risk Register' },
   { to: '/portal/incidents', icon: Activity, label: 'Incidents' },
   { to: '/portal/assets', icon: Server, label: 'Assets' },
+  { to: '/portal/vendors', icon: Globe, label: 'Vendor Risk' },
+  { to: '/portal/evidence', icon: FolderOpen, label: 'Evidence' },
   { to: '/portal/reports', icon: FileText, label: 'Reports' },
   { to: '/portal/team', icon: Users, label: 'Team' },
   { to: '/portal/audit-log', icon: BookOpen, label: 'Audit Log' },
