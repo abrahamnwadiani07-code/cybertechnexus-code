@@ -87,8 +87,8 @@ export default function Navbar() {
             <Link to="/#health-check" className="btn btn-secondary text-xs py-2.5 px-5 no-underline">
               Free Health Check
             </Link>
-            <Link to="/contact" className="btn btn-primary text-xs py-2.5 px-5 no-underline">
-              Get Protected
+            <Link to="/portal/login" className="btn btn-primary text-xs py-2.5 px-5 no-underline">
+              Client Portal
             </Link>
           </div>
 
