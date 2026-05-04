@@ -1,0 +1,21 @@
+{
+  "name": "CyberTech Nexus",
+  "short_name": "CTN",
+  "description": "Enterprise-grade cybersecurity solutions, compliance automation, and security training.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#030b14",
+  "theme_color": "#1a6bff",
+  "icons": [
+    {
+      "src": "/ctn-logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/ctn-logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

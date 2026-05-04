@@ -18,6 +18,9 @@ import TermsPage from '@/pages/TermsPage';
 import NotFoundPage from '@/pages/NotFoundPage';
 import PremiumBackground from '@/components/PremiumBackground';
 import CookieConsent from '@/components/CookieConsent';
+import BackToTop from '@/components/BackToTop';
+import SearchModal from '@/components/SearchModal';
+import { ThemeProvider } from '@/components/ThemeToggle';
 import { AuthProvider } from '@/portal/context/AuthContext';
 import PortalLayout from '@/portal/components/PortalLayout';
 import LoginPage from '@/portal/pages/LoginPage';
@@ -37,8 +40,13 @@ import './index.css';
 function App() {
   return (
     <ErrorBoundary>
+    <ThemeProvider>
     <AuthProvider>
       <Router>
+        {/* Skip to content - accessibility */}
+        <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[99999] focus:px-4 focus:py-2 focus:bg-ctn-blue focus:text-white focus:rounded-lg focus:text-sm">
+          Skip to content
+        </a>
         <Routes>
           {/* Portal routes — no premium background */}
           <Route path="/portal/login" element={<LoginPage />} />
@@ -61,7 +69,7 @@ function App() {
           <Route path="*" element={
             <div className="min-h-screen text-ctn-text">
               <PremiumBackground />
-              <div className="relative z-10">
+              <div id="main-content" className="relative z-10">
                 <Routes>
                   <Route path="/" element={<HomePage />} />
                   <Route path="/services" element={<ServicesPage />} />
@@ -84,6 +92,8 @@ function App() {
           } />
         </Routes>
         <CookieConsent />
+        <BackToTop />
+        <SearchModal />
         <Toaster
           position="top-right"
           toastOptions={{
@@ -95,6 +105,7 @@ function App() {
         />
       </Router>
     </AuthProvider>
+    </ThemeProvider>
     </ErrorBoundary>
   );
 }

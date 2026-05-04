@@ -4,6 +4,7 @@ import { Send, Mail, MapPin, Phone, Clock, MessageSquare, Calendar, Shield } fro
 import toast from 'react-hot-toast';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import BookingWidget from '@/components/BookingWidget';
 
 const serviceOptions = ['Cybersecurity Strategy & Advisory', 'Penetration Testing', 'Incident Response', 'IT & Cybersecurity Consultancy', 'Compliance & Regulatory Services', 'Network Security', 'Staffing Solutions', 'Security Awareness Training', 'Compliance Board OS Demo', 'Other'];
 
@@ -103,6 +104,10 @@ export default function ContactPage() {
               </button>
             </motion.form>
           </div>
+          {/* Booking Widget */}
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }} className="mt-16">
+            <BookingWidget />
+          </motion.div>
         </div>
       </div>
       <Footer />

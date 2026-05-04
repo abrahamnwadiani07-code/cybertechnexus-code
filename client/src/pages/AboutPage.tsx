@@ -3,6 +3,8 @@ import { motion } from 'framer-motion';
 import { Target, Award, Zap, MapPin, Globe, Shield, Users, GraduationCap, CheckCircle } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import Breadcrumbs from '@/components/Breadcrumbs';
+import SEO from '@/components/SEO';
 
 const values = [
   { icon: Target, title: 'Mission-Driven', text: 'We make enterprise-grade cybersecurity accessible to organizations of every size.' },
@@ -22,7 +24,9 @@ const timeline = [
 export default function AboutPage() {
   return (
     <>
+      <SEO title="About Us" description="Learn about CyberTech Nexus — our mission, leadership team, certifications, and global operations protecting 200+ organizations." path="/about" />
       <Navbar />
+      <Breadcrumbs />
       <div className="relative overflow-hidden">
         {/* Hero */}
         <div className="relative py-20">

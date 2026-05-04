@@ -2,6 +2,7 @@ import { Shield, AlertTriangle, Activity, Server, TrendingUp, TrendingDown, Chec
 import { useAuth } from '../context/AuthContext';
 import { frameworks, risks, incidents, assets, activityLog } from '../data/mockData';
 import MiniChart from '../components/MiniChart';
+import OnboardingWizard from '../components/OnboardingWizard';
 
 const severityColor: Record<string, string> = { critical: '#ff3b5c', high: '#ff6b35', medium: '#ffb039', low: '#1a6bff' };
 const incSevColor: Record<string, string> = { P1: '#ff3b5c', P2: '#ff6b35', P3: '#ffb039', P4: '#1a6bff' };
@@ -169,6 +170,7 @@ export default function DashboardPage() {
           </div>
         </div>
       </div>
+      <OnboardingWizard />
     </div>
   );
 }

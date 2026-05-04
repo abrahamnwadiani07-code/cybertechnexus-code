@@ -267,10 +267,10 @@ export default function TrustCenterPage() {
             <h2 className="font-poppins font-bold text-2xl text-ctn-text-bright mb-6 flex items-center gap-3">
               <Download size={22} className="text-ctn-blue" /> Security Documents
             </h2>
-            <p className="text-ctn-text-dim text-sm mb-6">Request access to these documents by contacting <span className="text-ctn-blue">trust@cybertechnexus.com</span> or through your account manager.</p>
+            <p className="text-ctn-text-dim text-sm mb-6">Download public resources below. For confidential documents, contact <span className="text-ctn-blue">trust@cybertechnexus.com</span> or your account manager.</p>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {documents.map((doc) => (
-                <div key={doc.name} className="cyber-card p-5 group cursor-pointer">
+                <div key={doc.name} className="cyber-card p-5 group">
                   <div className="flex items-start justify-between mb-2">
                     <div className="flex items-center gap-2">
                       <FileCheck size={16} className="text-ctn-blue" />
@@ -278,7 +278,18 @@ export default function TrustCenterPage() {
                     </div>
                     <span className="font-mono text-[9px] text-ctn-text-dim border border-ctn-border px-1.5 py-0.5 rounded">{doc.type}</span>
                   </div>
-                  <p className="font-poppins text-xs text-ctn-text-dim leading-relaxed">{doc.description}</p>
+                  <p className="font-poppins text-xs text-ctn-text-dim leading-relaxed mb-3">{doc.description}</p>
+                  <button
+                    onClick={() => {
+                      const el = document.createElement('a');
+                      el.href = '#';
+                      el.download = `${doc.name.replace(/\s+/g, '-').toLowerCase()}.pdf`;
+                      alert(`In production, this would download: ${doc.name}.pdf\n\nContact trust@cybertechnexus.com for access.`);
+                    }}
+                    className="inline-flex items-center gap-1.5 text-[11px] font-medium text-ctn-blue hover:text-white transition-colors bg-transparent border-none cursor-pointer font-poppins"
+                  >
+                    <Download size={12} /> Download PDF
+                  </button>
                 </div>
               ))}
             </div>

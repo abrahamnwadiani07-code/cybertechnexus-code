@@ -203,3 +203,71 @@ body {
   stroke: #1a6bff;
   transition: stroke-dashoffset 1.5s ease;
 }
+
+/* ── Light Mode ────────────────────── */
+.light body,
+html.light body {
+  background: #f8fafc;
+  color: #334155;
+}
+
+html.light .bg-ctn-bg { background: #f8fafc; }
+html.light .bg-ctn-bg-elevated { background: #ffffff; }
+html.light .text-ctn-text { color: #334155; }
+html.light .text-ctn-text-bright { color: #0f172a; }
+html.light .text-ctn-text-dim { color: #64748b; }
+html.light .border-ctn-border { border-color: #e2e8f0; }
+
+html.light .cyber-card {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: #e2e8f0;
+}
+html.light .cyber-card:hover {
+  border-color: rgba(26, 107, 255, 0.3);
+  box-shadow: 0 8px 40px rgba(26, 107, 255, 0.08);
+}
+
+html.light .input-field {
+  background: #f8fafc;
+  border-color: #e2e8f0;
+  color: #334155;
+}
+html.light .input-field:focus {
+  border-color: #1a6bff;
+  box-shadow: 0 0 0 3px rgba(26, 107, 255, 0.1);
+}
+html.light .input-field::placeholder {
+  color: #94a3b8;
+}
+
+html.light .btn-secondary {
+  color: #334155;
+  border-color: #e2e8f0;
+}
+html.light .btn-secondary:hover {
+  color: #1a6bff;
+  border-color: #1a6bff;
+}
+
+html.light ::-webkit-scrollbar-track { background: #f8fafc; }
+html.light ::-webkit-scrollbar-thumb { background: rgba(26, 107, 255, 0.15); }
+
+/* ── Screen reader only (accessibility) ── */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* ── Focus styles (accessibility) ──── */
+*:focus-visible {
+  outline: 2px solid #1a6bff;
+  outline-offset: 2px;
+  border-radius: 4px;
+}

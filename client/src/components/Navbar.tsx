@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, AlertTriangle, ChevronDown, Shield, Search, Lock, Server, FileCheck, Users, GraduationCap, AlertCircle } from 'lucide-react';
+import ThemeToggle from '@/components/ThemeToggle';
 
 const services = [
   { slug: 'cybersecurity-advisory', icon: Shield, title: 'Strategy & Advisory', desc: 'Security assessments & roadmaps' },
@@ -116,6 +117,7 @@ export default function Navbar() {
 
           {/* CTA Buttons */}
           <div className="hidden lg:flex items-center gap-3">
+            <ThemeToggle />
             <Link to="/#health-check" className="btn btn-secondary text-xs py-2.5 px-5 no-underline">
               Free Health Check
             </Link>

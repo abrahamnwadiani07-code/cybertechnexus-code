@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://cybertechnexus.vercel.app/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://cybertechnexus.vercel.app/services</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://cybertechnexus.vercel.app/services/cybersecurity-advisory</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://cybertechnexus.vercel.app/services/penetration-testing</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://cybertechnexus.vercel.app/services/incident-response</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://cybertechnexus.vercel.app/services/compliance-grc</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://cybertechnexus.vercel.app/services/network-security</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://cybertechnexus.vercel.app/services/cybersecurity-staffing</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://cybertechnexus.vercel.app/pricing</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://cybertechnexus.vercel.app/training</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://cybertechnexus.vercel.app/about</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://cybertechnexus.vercel.app/careers</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://cybertechnexus.vercel.app/partners</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://cybertechnexus.vercel.app/contact</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://cybertechnexus.vercel.app/trust-center</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://cybertechnexus.vercel.app/blog</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://cybertechnexus.vercel.app/blog/zero-trust-architecture-2025</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://cybertechnexus.vercel.app/blog/incident-response-playbook</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://cybertechnexus.vercel.app/blog/cloud-security-best-practices</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://cybertechnexus.vercel.app/privacy</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://cybertechnexus.vercel.app/terms</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+</urlset>
