@@ -24,7 +24,8 @@ import { ThemeProvider } from '@/components/ThemeToggle';
 import { AuthProvider } from '@/portal/context/AuthContext';
 import PortalLayout from '@/portal/components/PortalLayout';
 import LoginPage from '@/portal/pages/LoginPage';
-import DashboardPage from '@/portal/pages/DashboardPage';
+import DashboardRouter from '@/portal/pages/DashboardRouter';
+import AdminManagePage from '@/portal/pages/AdminManagePage';
 import CompliancePage from '@/portal/pages/CompliancePage';
 import RisksPage from '@/portal/pages/RisksPage';
 import IncidentsPage from '@/portal/pages/IncidentsPage';
@@ -52,7 +53,8 @@ function App() {
           <Route path="/portal/login" element={<LoginPage />} />
           <Route path="/portal" element={<PortalLayout />}>
             <Route index element={<Navigate to="/portal/dashboard" replace />} />
-            <Route path="dashboard" element={<DashboardPage />} />
+            <Route path="dashboard" element={<DashboardRouter />} />
+            <Route path="manage" element={<AdminManagePage />} />
             <Route path="compliance" element={<CompliancePage />} />
             <Route path="risks" element={<RisksPage />} />
             <Route path="incidents" element={<IncidentsPage />} />

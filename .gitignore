@@ -1,2 +1,4 @@
 node_modules\ndist\n.env\n*.log
 client/dist/
+
+.vercel

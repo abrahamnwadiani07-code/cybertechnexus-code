@@ -1,25 +1,55 @@
 import { NavLink, Outlet, Navigate, useLocation } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
+import { useAuth, type PortalRole } from '../context/AuthContext';
 import {
   LayoutDashboard, Shield, AlertTriangle, FileText, Server,
   Users, Settings, LogOut, Bell, Search, ChevronDown,
-  Activity, BookOpen, Globe, FolderOpen
+  Activity, BookOpen, Globe, FolderOpen, GraduationCap, Building2, Award, Calendar
 } from 'lucide-react';
 import { useState } from 'react';
 
-const navItems = [
-  { to: '/portal/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
-  { to: '/portal/compliance', icon: Shield, label: 'Compliance' },
-  { to: '/portal/risks', icon: AlertTriangle, label: 'Risk Register' },
-  { to: '/portal/incidents', icon: Activity, label: 'Incidents' },
-  { to: '/portal/assets', icon: Server, label: 'Assets' },
-  { to: '/portal/vendors', icon: Globe, label: 'Vendor Risk' },
-  { to: '/portal/evidence', icon: FolderOpen, label: 'Evidence' },
-  { to: '/portal/reports', icon: FileText, label: 'Reports' },
-  { to: '/portal/team', icon: Users, label: 'Team' },
-  { to: '/portal/audit-log', icon: BookOpen, label: 'Audit Log' },
-  { to: '/portal/settings', icon: Settings, label: 'Settings' },
-];
+type NavItem = { to: string; icon: typeof LayoutDashboard; label: string };
+
+const navByRole: Record<PortalRole, NavItem[]> = {
+  admin: [
+    { to: '/portal/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
+    { to: '/portal/manage', icon: Users, label: 'User Management' },
+    { to: '/portal/compliance', icon: Shield, label: 'Compliance' },
+    { to: '/portal/risks', icon: AlertTriangle, label: 'Risk Register' },
+    { to: '/portal/incidents', icon: Activity, label: 'Incidents' },
+    { to: '/portal/assets', icon: Server, label: 'Assets' },
+    { to: '/portal/vendors', icon: Globe, label: 'Vendor Risk' },
+    { to: '/portal/evidence', icon: FolderOpen, label: 'Evidence' },
+    { to: '/portal/reports', icon: FileText, label: 'Reports' },
+    { to: '/portal/team', icon: Building2, label: 'Team' },
+    { to: '/portal/audit-log', icon: BookOpen, label: 'Audit Log' },
+    { to: '/portal/settings', icon: Settings, label: 'Settings' },
+  ],
+  company: [
+    { to: '/portal/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
+    { to: '/portal/compliance', icon: Shield, label: 'Compliance' },
+    { to: '/portal/risks', icon: AlertTriangle, label: 'Risk Register' },
+    { to: '/portal/incidents', icon: Activity, label: 'Incidents' },
+    { to: '/portal/assets', icon: Server, label: 'Assets' },
+    { to: '/portal/team', icon: Users, label: 'Employees' },
+    { to: '/portal/reports', icon: FileText, label: 'Reports' },
+    { to: '/portal/settings', icon: Settings, label: 'Settings' },
+  ],
+  individual: [
+    { to: '/portal/dashboard', icon: LayoutDashboard, label: 'My Dashboard' },
+    { to: '/portal/certifications', icon: Award, label: 'My Certifications' },
+    { to: '/portal/schedule', icon: Calendar, label: 'Schedule' },
+    { to: '/portal/reports', icon: FileText, label: 'Transcripts' },
+    { to: '/portal/settings', icon: Settings, label: 'Settings' },
+  ],
+  trainer: [
+    { to: '/portal/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
+    { to: '/portal/courses', icon: GraduationCap, label: 'My Courses' },
+    { to: '/portal/students', icon: Users, label: 'Students' },
+    { to: '/portal/schedule', icon: Calendar, label: 'Schedule' },
+    { to: '/portal/reports', icon: FileText, label: 'Reports' },
+    { to: '/portal/settings', icon: Settings, label: 'Settings' },
+  ],
+};
 
 export default function PortalLayout() {
   const { user, isAuthenticated, logout } = useAuth();
@@ -29,6 +59,9 @@ export default function PortalLayout() {
   const location = useLocation();
 
   if (!isAuthenticated) return <Navigate to="/portal/login" state={{ from: location }} replace />;
+
+  const navItems = navByRole[user?.role || 'individual'];
+  const portalLabel = user?.role === 'admin' ? 'ADMIN PORTAL' : user?.role === 'company' ? 'COMPANY PORTAL' : user?.role === 'trainer' ? 'TRAINER PORTAL' : 'STUDENT PORTAL';
 
   return (
     <div className="flex h-screen bg-[#030b14] overflow-hidden">
@@ -40,7 +73,7 @@ export default function PortalLayout() {
           {!sidebarCollapsed && (
             <div className="overflow-hidden">
               <div className="font-poppins font-bold text-sm text-white leading-tight truncate">CTN Portal</div>
-              <div className="font-mono text-[8px] text-ctn-blue tracking-wider">COMPLIANCE OS</div>
+              <div className="font-mono text-[8px] text-ctn-blue tracking-wider">{portalLabel}</div>
             </div>
           )}
         </div>

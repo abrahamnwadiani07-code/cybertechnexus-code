@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { Shield, Eye, EyeOff, ArrowRight, AlertCircle } from 'lucide-react';
+import { Eye, EyeOff, ArrowRight, AlertCircle } from 'lucide-react';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -22,7 +22,7 @@ export default function LoginPage() {
       if (login(email, password)) {
         navigate('/portal/dashboard');
       } else {
-        setError('Invalid email or password. Try demo@demo.com / demo');
+        setError('Invalid email or password.');
       }
       setLoading(false);
     }, 600);
@@ -103,20 +103,32 @@ export default function LoginPage() {
           </div>
         </form>
 
-        {/* Demo credentials */}
-        <div className="mt-6 bg-[#0a1525] border border-white/[0.06] rounded-xl p-5">
-          <div className="font-poppins text-xs font-medium text-[#5a7a8a] mb-3">Demo credentials</div>
-          <div className="space-y-2 font-mono text-xs">
-            <div className="flex justify-between text-[#5a7a8a]">
-              <span>demo@demo.com</span><span className="text-white">demo</span>
-            </div>
-            <div className="flex justify-between text-[#5a7a8a]">
-              <span>admin@cybertechnexus.com</span><span className="text-white">demo123</span>
-            </div>
+
+        {/* Demo Accounts */}
+        <div className="mt-6 bg-[#0a1525] border border-white/[0.06] rounded-xl p-4">
+          <p className="font-poppins text-[10px] text-[#5a7a8a] uppercase tracking-wider mb-3 text-center">Demo Accounts</p>
+          <div className="grid grid-cols-2 gap-2">
+            {[
+              { label: 'Admin', email: 'admin@cybertechnexus.com', pw: 'CyB3rN3xu$2026!', color: '#ff3b5c' },
+              { label: 'Company', email: 'company@demo.com', pw: 'demo123', color: '#1a6bff' },
+              { label: 'Student', email: 'student@demo.com', pw: 'demo123', color: '#10b981' },
+              { label: 'Trainer', email: 'trainer@demo.com', pw: 'demo123', color: '#8b5cf6' },
+            ].map(acc => (
+              <button
+                key={acc.label}
+                type="button"
+                onClick={() => { setEmail(acc.email); setPassword(acc.pw); }}
+                className="px-3 py-2 rounded-lg border border-white/[0.06] bg-white/[0.02] text-left hover:border-[color:var(--c)]/30 transition-all cursor-pointer"
+                style={{ '--c': acc.color } as React.CSSProperties}
+              >
+                <div className="font-poppins text-[10px] font-semibold text-white">{acc.label}</div>
+                <div className="font-mono text-[8px] text-[#5a7a8a] truncate">{acc.email}</div>
+              </button>
+            ))}
           </div>
         </div>
 
-        <p className="text-center mt-6 font-poppins text-xs text-[#5a7a8a]">
+        <p className="text-center mt-4 font-poppins text-xs text-[#5a7a8a]">
           <Link to="/" className="text-ctn-blue hover:underline no-underline">← Back to website</Link>
         </p>
       </div>
