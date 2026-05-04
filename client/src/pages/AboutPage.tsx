@@ -88,6 +88,42 @@ export default function AboutPage() {
             </div>
           </motion.div>
 
+          {/* Leadership Team */}
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-16">
+            <h2 className="font-poppins font-bold text-2xl text-ctn-text-bright mb-8 text-center">Leadership Team</h2>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {[
+                { name: 'Abraham Nwadiani', role: 'Founder & CEO', bio: 'CISSP, CISM. 12+ years in enterprise security. Former security consultant at Big 4. Passionate about democratizing cybersecurity for organizations of all sizes.', certs: ['CISSP', 'CISM', 'CRISC'] },
+                { name: 'Chidera Okafor', role: 'Chief Technology Officer', bio: 'OSCP, GXPN. Leads our offensive security practice and platform engineering. Built security programs for Fortune 500 financial institutions.', certs: ['OSCP', 'GXPN', 'AWS-SAP'] },
+                { name: 'Rachel Thompson', role: 'VP of Compliance & GRC', bio: 'CISA, ISO 27001 Lead Auditor. 10+ years in regulatory compliance. Designed audit programs across healthcare, fintech, and SaaS industries.', certs: ['CISA', 'ISO 27001 LA', 'GDPR-P'] },
+                { name: 'David Adesanya', role: 'Head of Training Academy', bio: 'CEH, CompTIA Security+. Passionate educator who has trained 1,000+ cybersecurity professionals across Africa and the US.', certs: ['CEH', 'GCIH', 'CompTIA S+'] },
+                { name: 'Sarah Mitchell', role: 'Director of Incident Response', bio: 'GCIH, GCFA. Former FBI Cyber Division analyst. Leads our 24/7 IR team with sub-8-minute response times.', certs: ['GCIH', 'GCFA', 'GREM'] },
+                { name: 'Michael Chen', role: 'Head of Security Engineering', bio: 'CCSP, Azure Security Engineer. Architects secure cloud environments and zero-trust networks for enterprise clients.', certs: ['CCSP', 'AZ-500', 'CKS'] },
+              ].map((person, i) => (
+                <motion.div
+                  key={person.name}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.08 }}
+                  className="p-6 rounded-xl border border-ctn-border bg-ctn-bg-elevated hover:border-ctn-blue/20 transition-all"
+                >
+                  <div className="w-12 h-12 rounded-full bg-ctn-blue/10 border border-ctn-blue/20 flex items-center justify-center text-ctn-blue font-poppins font-bold text-sm mb-4">
+                    {person.name.split(' ').map(n => n[0]).join('')}
+                  </div>
+                  <h3 className="font-poppins font-semibold text-ctn-text-bright mb-0.5">{person.name}</h3>
+                  <p className="text-xs text-ctn-blue mb-3">{person.role}</p>
+                  <p className="text-ctn-text-dim text-sm leading-relaxed mb-3">{person.bio}</p>
+                  <div className="flex flex-wrap gap-1.5">
+                    {person.certs.map(c => (
+                      <span key={c} className="text-[9px] font-mono text-ctn-blue bg-ctn-blue/5 border border-ctn-blue/10 px-1.5 py-0.5 rounded">{c}</span>
+                    ))}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+
           {/* Locations */}
           <div className="grid md:grid-cols-2 gap-5 mb-16">
             {[{ icon: MapPin, place: 'Texas, USA', detail: 'North America Headquarters' }, { icon: Globe, place: 'Lagos, Nigeria', detail: 'Africa Operations Center' }].map((loc) => {
@@ -106,7 +142,10 @@ export default function AboutPage() {
           <div className="cyber-card p-10 text-center box-glow-blue">
             <h3 className="font-poppins font-bold text-xl text-ctn-text-bright mb-3">Want to join our mission?</h3>
             <p className="text-ctn-text-dim text-sm mb-6">We're always looking for talented security professionals.</p>
-            <Link to="/#contact" className="btn btn-primary text-sm py-3 px-8 no-underline inline-flex">Get in Touch</Link>
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <Link to="/careers" className="btn btn-primary text-sm py-3 px-8 no-underline inline-flex">View Open Positions</Link>
+              <Link to="/contact" className="btn btn-secondary text-sm py-3 px-8 no-underline inline-flex">Contact Us</Link>
+            </div>
           </div>
         </div>
       </div>

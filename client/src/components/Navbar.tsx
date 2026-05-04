@@ -1,21 +1,36 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { Menu, X, AlertTriangle } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Menu, X, AlertTriangle, ChevronDown, Shield, Search, Lock, Server, FileCheck, Users, GraduationCap, AlertCircle } from 'lucide-react';
+
+const services = [
+  { slug: 'cybersecurity-advisory', icon: Shield, title: 'Strategy & Advisory', desc: 'Security assessments & roadmaps' },
+  { slug: 'penetration-testing', icon: Search, title: 'Penetration Testing', desc: 'Red-team attack simulations' },
+  { slug: 'incident-response', icon: AlertCircle, title: 'Incident Response', desc: '24/7 breach containment' },
+  { slug: 'compliance-grc', icon: FileCheck, title: 'Compliance & GRC', desc: 'ISO 27001, SOC 2, GDPR' },
+  { slug: 'network-security', icon: Server, title: 'Network Security', desc: 'Infrastructure protection' },
+  { slug: 'cybersecurity-staffing', icon: Users, title: 'Security Staffing', desc: 'Expert team augmentation' },
+  { slug: 'cybersecurity-training', icon: GraduationCap, title: 'Training Academy', desc: 'Certifications & skills' },
+  { slug: 'managed-security', icon: Lock, title: 'Managed Security', desc: '24/7 SOC monitoring' },
+];
 
 const navLinks = [
-  { label: 'Services', href: '/services' },
-  { label: 'Training', href: '/training' },
-  { label: 'About', href: '/about' },
-  { label: 'Trust Center', href: '/trust-center' },
-  { label: 'Blog', href: '/blog' },
-  { label: 'Contact', href: '/contact' },
+  { label: 'Services', href: '/services', hasMega: true },
+  { label: 'Pricing', href: '/pricing', hasMega: false },
+  { label: 'Training', href: '/training', hasMega: false },
+  { label: 'About', href: '/about', hasMega: false },
+  { label: 'Trust Center', href: '/trust-center', hasMega: false },
+  { label: 'Blog', href: '/blog', hasMega: false },
+  { label: 'Contact', href: '/contact', hasMega: false },
 ];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [megaOpen, setMegaOpen] = useState(false);
   const location = useLocation();
+  const megaRef = useRef<HTMLDivElement>(null);
+  const megaTimeout = useRef<ReturnType<typeof setTimeout>>();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -23,10 +38,20 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  // Scroll to top on route change
   useEffect(() => {
     window.scrollTo(0, 0);
+    setMobileOpen(false);
+    setMegaOpen(false);
   }, [location.pathname]);
+
+  const handleMegaEnter = () => {
+    clearTimeout(megaTimeout.current);
+    setMegaOpen(true);
+  };
+
+  const handleMegaLeave = () => {
+    megaTimeout.current = setTimeout(() => setMegaOpen(false), 200);
+  };
 
   return (
     <>
@@ -66,19 +91,26 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop Links */}
-          <div className="hidden lg:flex items-center gap-7">
+          <div className="hidden lg:flex items-center gap-6">
             {navLinks.map((link) => (
-              <Link
+              <div
                 key={link.label}
-                to={link.href}
-                className={`font-poppins text-[13px] font-medium transition-colors no-underline ${
-                  location.pathname.startsWith(link.href)
-                    ? 'text-ctn-blue'
-                    : 'text-ctn-text-dim hover:text-ctn-blue'
-                }`}
+                className="relative"
+                onMouseEnter={link.hasMega ? handleMegaEnter : undefined}
+                onMouseLeave={link.hasMega ? handleMegaLeave : undefined}
               >
-                {link.label}
-              </Link>
+                <Link
+                  to={link.href}
+                  className={`font-poppins text-[13px] font-medium transition-colors no-underline inline-flex items-center gap-1 ${
+                    location.pathname.startsWith(link.href)
+                      ? 'text-ctn-blue'
+                      : 'text-ctn-text-dim hover:text-ctn-blue'
+                  }`}
+                >
+                  {link.label}
+                  {link.hasMega && <ChevronDown size={12} className={`transition-transform ${megaOpen ? 'rotate-180' : ''}`} />}
+                </Link>
+              </div>
             ))}
           </div>
 
@@ -101,37 +133,80 @@ export default function Navbar() {
           </button>
         </div>
 
+        {/* Mega Menu */}
+        <AnimatePresence>
+          {megaOpen && (
+            <motion.div
+              ref={megaRef}
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.2 }}
+              onMouseEnter={handleMegaEnter}
+              onMouseLeave={handleMegaLeave}
+              className="hidden lg:block absolute top-full left-0 right-0 bg-ctn-bg/98 backdrop-blur-xl border-b border-ctn-border shadow-2xl shadow-black/30"
+            >
+              <div className="max-w-7xl mx-auto px-6 lg:px-12 py-8">
+                <div className="grid grid-cols-4 gap-4">
+                  {services.map((s) => (
+                    <Link
+                      key={s.slug}
+                      to={`/services/${s.slug}`}
+                      className="flex items-start gap-3 p-4 rounded-xl hover:bg-ctn-blue/5 border border-transparent hover:border-ctn-blue/10 transition-all no-underline group"
+                    >
+                      <s.icon size={20} className="text-ctn-blue mt-0.5 flex-shrink-0" />
+                      <div>
+                        <div className="font-poppins font-semibold text-sm text-ctn-text-bright group-hover:text-ctn-blue transition-colors">{s.title}</div>
+                        <div className="text-xs text-ctn-text-dim mt-0.5">{s.desc}</div>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+                <div className="mt-6 pt-4 border-t border-ctn-border flex items-center justify-between">
+                  <span className="text-xs text-ctn-text-dim">Need help choosing? Our team will recommend the right services for your organization.</span>
+                  <Link to="/contact" className="text-xs font-medium text-ctn-blue hover:text-white transition-colors no-underline">
+                    Talk to an Expert →
+                  </Link>
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
         {/* Mobile Menu */}
-        {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="lg:hidden bg-ctn-bg/98 backdrop-blur-lg border-b border-ctn-border px-6 pb-6"
-          >
-            {navLinks.map((link) => (
-              <Link
-                key={link.label}
-                to={link.href}
-                onClick={() => setMobileOpen(false)}
-                className={`block py-3 font-poppins text-sm font-medium transition-colors no-underline ${
-                  location.pathname.startsWith(link.href)
-                    ? 'text-ctn-blue'
-                    : 'text-ctn-text-dim hover:text-ctn-blue'
-                }`}
-              >
-                {link.label}
-              </Link>
-            ))}
-            <div className="flex flex-col gap-3 mt-4">
-              <Link to="/#health-check" onClick={() => setMobileOpen(false)} className="btn btn-secondary text-xs py-2.5 no-underline text-center">
-                Free Health Check
-              </Link>
-              <Link to="/contact" onClick={() => setMobileOpen(false)} className="btn btn-primary text-xs py-2.5 no-underline text-center">
-                Get Protected
-              </Link>
-            </div>
-          </motion.div>
-        )}
+        <AnimatePresence>
+          {mobileOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              className="lg:hidden bg-ctn-bg/98 backdrop-blur-lg border-b border-ctn-border px-6 pb-6"
+            >
+              {navLinks.map((link) => (
+                <Link
+                  key={link.label}
+                  to={link.href}
+                  onClick={() => setMobileOpen(false)}
+                  className={`block py-3 font-poppins text-sm font-medium transition-colors no-underline ${
+                    location.pathname.startsWith(link.href)
+                      ? 'text-ctn-blue'
+                      : 'text-ctn-text-dim hover:text-ctn-blue'
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              ))}
+              <div className="flex flex-col gap-3 mt-4">
+                <Link to="/#health-check" onClick={() => setMobileOpen(false)} className="btn btn-secondary text-xs py-2.5 no-underline text-center">
+                  Free Health Check
+                </Link>
+                <Link to="/portal/login" onClick={() => setMobileOpen(false)} className="btn btn-primary text-xs py-2.5 no-underline text-center">
+                  Client Portal
+                </Link>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </motion.nav>
     </>
   );

@@ -1,6 +1,7 @@
 import { Shield, AlertTriangle, Activity, Server, TrendingUp, TrendingDown, CheckCircle, Clock, FileText, Users } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { frameworks, risks, incidents, assets, activityLog } from '../data/mockData';
+import MiniChart from '../components/MiniChart';
 
 const severityColor: Record<string, string> = { critical: '#ff3b5c', high: '#ff6b35', medium: '#ffb039', low: '#1a6bff' };
 const incSevColor: Record<string, string> = { P1: '#ff3b5c', P2: '#ff6b35', P3: '#ffb039', P4: '#1a6bff' };
@@ -13,10 +14,10 @@ export default function DashboardPage() {
   const totalVulns = assets.reduce((s, a) => s + a.vulns, 0);
 
   const cards = [
-    { label: 'Compliance Score', value: `${complianceAvg}%`, icon: Shield, color: complianceAvg >= 80 ? '#1a6bff' : '#ffb039', trend: '+4%', trendUp: true },
-    { label: 'Open Risks', value: openRisks.length.toString(), icon: AlertTriangle, color: openRisks.length > 5 ? '#ffb039' : '#1a6bff', trend: '-2', trendUp: false },
-    { label: 'Active Incidents', value: activeIncidents.length.toString(), icon: Activity, color: activeIncidents.length > 3 ? '#ff3b5c' : '#1a6bff', trend: null, trendUp: false },
-    { label: 'Vulnerabilities', value: totalVulns.toString(), icon: Server, color: totalVulns > 10 ? '#ff6b35' : '#1a6bff', trend: '-5', trendUp: false },
+    { label: 'Compliance Score', value: `${complianceAvg}%`, icon: Shield, color: complianceAvg >= 80 ? '#1a6bff' : '#ffb039', trend: '+4%', trendUp: true, chartData: [72, 75, 78, 80, 82, 84, 85, complianceAvg] },
+    { label: 'Open Risks', value: openRisks.length.toString(), icon: AlertTriangle, color: openRisks.length > 5 ? '#ffb039' : '#1a6bff', trend: '-2', trendUp: false, chartData: [12, 10, 9, 8, 7, 8, 6, openRisks.length] },
+    { label: 'Active Incidents', value: activeIncidents.length.toString(), icon: Activity, color: activeIncidents.length > 3 ? '#ff3b5c' : '#1a6bff', trend: null, trendUp: false, chartData: [3, 5, 4, 2, 3, 4, 3, activeIncidents.length] },
+    { label: 'Vulnerabilities', value: totalVulns.toString(), icon: Server, color: totalVulns > 10 ? '#ff6b35' : '#1a6bff', trend: '-5', trendUp: false, chartData: [28, 24, 22, 18, 16, 14, 12, totalVulns] },
   ];
 
   return (
@@ -45,9 +46,41 @@ export default function DashboardPage() {
                   </span>
                 )}
               </div>
+              <div className="mt-3 -mx-1">
+                <MiniChart data={c.chartData} color={c.color} height={32} />
+              </div>
             </div>
           );
         })}
+      </div>
+
+      {/* Security Posture Summary */}
+      <div className="grid lg:grid-cols-4 gap-4">
+        <div className="bg-[#0a1525] border border-white/[0.06] rounded-xl p-5 flex items-center gap-4">
+          <svg width="56" height="56" viewBox="0 0 56 56">
+            <circle cx="28" cy="28" r="24" fill="none" stroke="#1a2a3a" strokeWidth="4" />
+            <circle cx="28" cy="28" r="24" fill="none" stroke="#1a6bff" strokeWidth="4" strokeLinecap="round" strokeDasharray={`${complianceAvg * 1.5} 150`} transform="rotate(-90 28 28)" />
+          </svg>
+          <div>
+            <div className="font-poppins font-bold text-lg text-white">{complianceAvg}%</div>
+            <div className="text-[10px] text-[#5a7a8a] font-mono">OVERALL SCORE</div>
+          </div>
+        </div>
+        <div className="bg-[#0a1525] border border-white/[0.06] rounded-xl p-5">
+          <div className="text-[10px] text-[#5a7a8a] font-mono mb-2">THREAT LEVEL</div>
+          <div className="font-poppins font-bold text-lg text-[#ffb039]">Moderate</div>
+          <div className="text-xs text-[#5a7a8a]">2 critical items</div>
+        </div>
+        <div className="bg-[#0a1525] border border-white/[0.06] rounded-xl p-5">
+          <div className="text-[10px] text-[#5a7a8a] font-mono mb-2">NEXT AUDIT</div>
+          <div className="font-poppins font-bold text-lg text-white">Mar 15</div>
+          <div className="text-xs text-[#5a7a8a]">ISO 27001 Surveillance</div>
+        </div>
+        <div className="bg-[#0a1525] border border-white/[0.06] rounded-xl p-5">
+          <div className="text-[10px] text-[#5a7a8a] font-mono mb-2">UPTIME</div>
+          <div className="font-poppins font-bold text-lg text-green-400">99.98%</div>
+          <div className="text-xs text-[#5a7a8a]">Last 30 days</div>
+        </div>
       </div>
 
       <div className="grid lg:grid-cols-3 gap-6">

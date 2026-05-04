@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
+import ErrorBoundary from '@/components/ErrorBoundary';
 import HomePage from '@/pages/HomePage';
 import ServicesPage from '@/pages/ServicesPage';
 import ServiceDetailPage from '@/pages/ServiceDetailPage';
@@ -9,7 +10,14 @@ import ContactPage from '@/pages/ContactPage';
 import BlogPage from '@/pages/BlogPage';
 import BlogPostPage from '@/pages/BlogPostPage';
 import TrustCenterPage from '@/pages/TrustCenterPage';
+import CareersPage from '@/pages/CareersPage';
+import PricingPage from '@/pages/PricingPage';
+import PartnersPage from '@/pages/PartnersPage';
+import PrivacyPage from '@/pages/PrivacyPage';
+import TermsPage from '@/pages/TermsPage';
+import NotFoundPage from '@/pages/NotFoundPage';
 import PremiumBackground from '@/components/PremiumBackground';
+import CookieConsent from '@/components/CookieConsent';
 import { AuthProvider } from '@/portal/context/AuthContext';
 import PortalLayout from '@/portal/components/PortalLayout';
 import LoginPage from '@/portal/pages/LoginPage';
@@ -28,6 +36,7 @@ import './index.css';
 
 function App() {
   return (
+    <ErrorBoundary>
     <AuthProvider>
       <Router>
         <Routes>
@@ -63,11 +72,18 @@ function App() {
                   <Route path="/trust-center" element={<TrustCenterPage />} />
                   <Route path="/blog" element={<BlogPage />} />
                   <Route path="/blog/:slug" element={<BlogPostPage />} />
+                  <Route path="/careers" element={<CareersPage />} />
+                  <Route path="/pricing" element={<PricingPage />} />
+                  <Route path="/partners" element={<PartnersPage />} />
+                  <Route path="/privacy" element={<PrivacyPage />} />
+                  <Route path="/terms" element={<TermsPage />} />
+                  <Route path="*" element={<NotFoundPage />} />
                 </Routes>
               </div>
             </div>
           } />
         </Routes>
+        <CookieConsent />
         <Toaster
           position="top-right"
           toastOptions={{
@@ -79,6 +95,7 @@ function App() {
         />
       </Router>
     </AuthProvider>
+    </ErrorBoundary>
   );
 }
 

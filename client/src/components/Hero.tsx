@@ -1,5 +1,7 @@
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Play, ChevronDown } from 'lucide-react';
+import { ArrowRight, Play, ChevronDown, Shield } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const stats = [
   { value: '200+', label: 'Organizations Protected' },
@@ -8,7 +10,39 @@ const stats = [
   { value: '6+', label: 'Compliance Frameworks' },
 ];
 
+const typingWords = [
+  'Penetration Testing',
+  'Compliance Automation',
+  'Incident Response',
+  'Threat Detection',
+  'Security Training',
+  'Risk Management',
+];
+
 export default function Hero() {
+  const [currentWord, setCurrentWord] = useState(0);
+  const [displayText, setDisplayText] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    const word = typingWords[currentWord];
+    const timeout = setTimeout(() => {
+      if (!isDeleting) {
+        setDisplayText(word.slice(0, displayText.length + 1));
+        if (displayText.length === word.length) {
+          setTimeout(() => setIsDeleting(true), 2000);
+        }
+      } else {
+        setDisplayText(word.slice(0, displayText.length - 1));
+        if (displayText.length === 0) {
+          setIsDeleting(false);
+          setCurrentWord((prev) => (prev + 1) % typingWords.length);
+        }
+      }
+    }, isDeleting ? 40 : 80);
+    return () => clearTimeout(timeout);
+  }, [displayText, isDeleting, currentWord]);
+
   const scrollTo = (id: string) => {
     document.querySelector(id)?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -24,6 +58,22 @@ export default function Hero() {
       <div className="absolute inset-0 bg-gradient-to-r from-ctn-bg via-ctn-bg/95 to-ctn-bg/70" />
       <div className="absolute inset-0 bg-gradient-to-t from-ctn-bg via-transparent to-ctn-bg/80" />
 
+      {/* Animated particles */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {[...Array(6)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-1 h-1 bg-ctn-blue/30 rounded-full"
+            style={{ left: `${15 + i * 15}%`, top: `${20 + (i % 3) * 25}%` }}
+            animate={{
+              y: [-20, 20, -20],
+              opacity: [0.2, 0.6, 0.2],
+            }}
+            transition={{ duration: 3 + i * 0.5, repeat: Infinity, delay: i * 0.3 }}
+          />
+        ))}
+      </div>
+
       <div className="relative px-6 lg:px-12 pt-20 pb-16 max-w-7xl mx-auto w-full">
         {/* Live status */}
         <motion.div
@@ -34,7 +84,7 @@ export default function Hero() {
         >
           <div className="w-2 h-2 bg-ctn-blue rounded-full animate-pulse-blue" />
           <span className="font-mono text-[11px] text-ctn-blue tracking-wider">
-            SECURING YOUR BUSINESS — GRC & CYBER DEFENSE
+            THREAT LEVEL: MONITORED — ALL SYSTEMS OPERATIONAL
           </span>
         </motion.div>
 
@@ -43,13 +93,34 @@ export default function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.15 }}
-          className="font-poppins font-extrabold text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.05] tracking-tight text-ctn-text-bright mb-6"
+          className="font-poppins font-extrabold text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.05] tracking-tight text-ctn-text-bright mb-4"
         >
-          Cutting-Edge{' '}
+          Enterprise-Grade{' '}
           <span className="text-ctn-blue text-glow-blue">Cybersecurity</span>
           <br />
           Solutions You Can Trust
         </motion.h1>
+
+        {/* Typing animation */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.4 }}
+          className="flex items-center gap-2 mb-6"
+        >
+          <Shield size={16} className="text-ctn-blue" />
+          <span className="font-mono text-sm text-ctn-text-dim">
+            Specializing in:{' '}
+            <span className="text-ctn-blue">
+              {displayText}
+              <motion.span
+                animate={{ opacity: [1, 0] }}
+                transition={{ duration: 0.5, repeat: Infinity }}
+                className="inline-block w-0.5 h-4 bg-ctn-blue ml-0.5 align-middle"
+              />
+            </span>
+          </span>
+        </motion.div>
 
         {/* Subtitle */}
         <motion.p
@@ -58,8 +129,8 @@ export default function Hero() {
           transition={{ duration: 0.7, delay: 0.3 }}
           className="text-lg md:text-xl text-ctn-text-dim max-w-2xl mb-10 leading-relaxed"
         >
-          CyberTech Nexus provides proactive cybersecurity solutions, training, and consulting
-          services to protect businesses and individuals from evolving cyber threats.
+          CyberTech Nexus provides proactive cybersecurity solutions, compliance automation, and
+          world-class training to protect organizations from evolving threats.
         </motion.p>
 
         {/* CTAs */}
@@ -77,6 +148,10 @@ export default function Hero() {
             Free Security Health Check
             <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
           </button>
+          <Link to="/pricing" className="btn btn-secondary group text-sm py-4 px-8 no-underline">
+            View Pricing
+            <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
+          </Link>
         </motion.div>
 
         {/* Stats Bar */}
