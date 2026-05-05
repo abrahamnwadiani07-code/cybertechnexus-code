@@ -103,31 +103,7 @@ export default function LoginPage() {
           </div>
         </form>
 
-
-        {/* Demo Accounts */}
-        <div className="mt-6 bg-[#0a1525] border border-white/[0.06] rounded-xl p-4">
-          <p className="font-poppins text-[10px] text-[#5a7a8a] uppercase tracking-wider mb-3 text-center">Demo Accounts</p>
-          <div className="grid grid-cols-2 gap-2">
-            <button type="button" onClick={() => { setEmail('admin@cybertechnexus.com'); setPassword('CyB3rN3xu$2026!'); }} className="px-3 py-2 rounded-lg border border-white/[0.06] bg-white/[0.02] text-left hover:border-ctn-blue/30 transition-all cursor-pointer">
-              <div className="font-poppins text-[10px] font-semibold text-white">Admin</div>
-              <div className="font-mono text-[8px] text-[#5a7a8a] truncate">admin@cybertechnexus.com</div>
-            </button>
-            <button type="button" onClick={() => { setEmail('company@demo.com'); setPassword('demo123'); }} className="px-3 py-2 rounded-lg border border-white/[0.06] bg-white/[0.02] text-left hover:border-ctn-blue/30 transition-all cursor-pointer">
-              <div className="font-poppins text-[10px] font-semibold text-white">Company</div>
-              <div className="font-mono text-[8px] text-[#5a7a8a] truncate">company@demo.com</div>
-            </button>
-            <button type="button" onClick={() => { setEmail('student@demo.com'); setPassword('demo123'); }} className="px-3 py-2 rounded-lg border border-white/[0.06] bg-white/[0.02] text-left hover:border-ctn-blue/30 transition-all cursor-pointer">
-              <div className="font-poppins text-[10px] font-semibold text-white">Student</div>
-              <div className="font-mono text-[8px] text-[#5a7a8a] truncate">student@demo.com</div>
-            </button>
-            <button type="button" onClick={() => { setEmail('trainer@demo.com'); setPassword('demo123'); }} className="px-3 py-2 rounded-lg border border-white/[0.06] bg-white/[0.02] text-left hover:border-ctn-blue/30 transition-all cursor-pointer">
-              <div className="font-poppins text-[10px] font-semibold text-white">Trainer</div>
-              <div className="font-mono text-[8px] text-[#5a7a8a] truncate">trainer@demo.com</div>
-            </button>
-          </div>
-        </div>
-
-        <p className="text-center mt-4 font-poppins text-xs text-[#5a7a8a]">
+        <p className="text-center mt-6 font-poppins text-xs text-[#5a7a8a]">
           <Link to="/" className="text-ctn-blue hover:underline no-underline">← Back to website</Link>
         </p>
       </div>
