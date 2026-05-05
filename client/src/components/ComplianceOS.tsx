@@ -290,18 +290,20 @@ export default function ComplianceOS() {
         </p>
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
           <a
-            href="#contact"
-            onClick={(e) => { e.preventDefault(); document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' }); }}
+            href="https://complianceos-app-three.vercel.app/demo"
+            target="_blank"
+            rel="noopener noreferrer"
             className="btn btn-primary text-sm py-3.5 px-8 no-underline"
           >
-            <Globe size={16} /> Request a Demo
+            <Globe size={16} /> Start Free Trial
           </a>
           <a
-            href="#health-check"
-            onClick={(e) => { e.preventDefault(); document.querySelector('#health-check')?.scrollIntoView({ behavior: 'smooth' }); }}
+            href="https://complianceos-app-three.vercel.app/login"
+            target="_blank"
+            rel="noopener noreferrer"
             className="btn btn-secondary text-sm py-3.5 px-8 no-underline"
           >
-            Free Health Check First <ChevronRight size={14} />
+            Sign In <ChevronRight size={14} />
           </a>
         </div>
       </motion.div>

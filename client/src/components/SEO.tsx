@@ -9,7 +9,7 @@ interface SEOProps {
 
 export default function SEO({ title, description, path = '', image = '/ctn-og.png' }: SEOProps) {
   const fullTitle = title === 'Home' ? 'CyberTech Nexus | Enterprise Cybersecurity Solutions' : `${title} | CyberTech Nexus`;
-  const url = `https://cybertechnexus.vercel.app${path}`;
+  const url = `https://cybertechnexus.com${path}`;
 
   useEffect(() => {
     document.title = fullTitle;

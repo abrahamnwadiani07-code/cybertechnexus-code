@@ -3,4 +3,4 @@ Allow: /
 Disallow: /portal/
 Disallow: /api/
 
-Sitemap: https://cybertechnexus.vercel.app/sitemap.xml
+Sitemap: https://cybertechnexus.com/sitemap.xml

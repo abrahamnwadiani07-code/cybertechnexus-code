@@ -18,15 +18,26 @@ interface AuthContextType {
   isAuthenticated: boolean;
 }
 
+/* eslint-disable @typescript-eslint/no-unused-vars */
 const USERS: Record<string, { password: string; user: User }> = {
   'admin@cybertechnexus.com': {
     password: 'CyB3rN3xu$2026!',
     user: { id: '1', name: 'Abraham N.', email: 'admin@cybertechnexus.com', role: 'admin', company: 'CyberTech Nexus', avatar: 'AN' },
   },
-  'company@demo.com': { password: 'demo123', user: { id: '2', name: 'David Chen', email: 'company@demo.com', role: 'company', company: 'TechScale SaaS', avatar: 'DC' } },
-  'student@demo.com': { password: 'demo123', user: { id: '3', name: 'Jessica Obi', email: 'student@demo.com', role: 'individual', company: 'Self', avatar: 'JO' } },
-  'trainer@demo.com': { password: 'demo123', user: { id: '4', name: 'David Adesanya', email: 'trainer@demo.com', role: 'trainer', company: 'CyberTech Nexus', avatar: 'DA' } },
+  'company@demo.com': {
+    password: 'demo123',
+    user: { id: '2', name: 'David Chen', email: 'company@demo.com', role: 'company', company: 'TechScale SaaS', avatar: 'DC' },
+  },
+  'student@demo.com': {
+    password: 'demo123',
+    user: { id: '3', name: 'Jessica Obi', email: 'student@demo.com', role: 'individual', company: 'Self', avatar: 'JO' },
+  },
+  'trainer@demo.com': {
+    password: 'demo123',
+    user: { id: '4', name: 'David Adesanya', email: 'trainer@demo.com', role: 'trainer', company: 'CyberTech Nexus', avatar: 'DA' },
+  },
 };
+/* eslint-enable @typescript-eslint/no-unused-vars */
 
 const AuthContext = createContext<AuthContextType | null>(null);
 
